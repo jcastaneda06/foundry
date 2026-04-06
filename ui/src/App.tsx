@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { ChatView } from "@/components/ChatView";
+import { GroceryPanel } from "@/components/GroceryPanel";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { loadConversations, saveConversations } from "@/lib/storage";
@@ -90,7 +91,7 @@ function App() {
       </Sheet>
 
       {/* Main chat area */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-w-0">
         {activeConversation ? (
           <ChatView
             key={activeConversation.id}
@@ -108,6 +109,9 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* Right sidebar — grocery lists */}
+      {activeConversation && <GroceryPanel />}
     </div>
   );
 }

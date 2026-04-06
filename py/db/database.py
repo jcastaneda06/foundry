@@ -2,8 +2,7 @@ import sqlite3
 
 db_name = "groceries.db"
 
-def get_connection(): 
-  print(f"Connection to {db_name} established")
+def get_connection():
   return sqlite3.connect(db_name)
 
 def init_db():
@@ -25,14 +24,14 @@ def init_db():
         id INTEGER PRIMARY KEY,
         name VARCHAR,
         description VARCHAR,
-        completed NUMBER -- 0 for false, 1 for true
+        completed NUMBER, -- 0 for false, 1 for true
+        conversation_id INTEGER
       )
     """)
 
-    print("Successfully created tables")
-
-def execute_query(query: str, params: tuple) -> list[tuple]:
+def execute_query(query: str, params: tuple):
   with get_connection() as conn:
     cursor = conn.execute(query, params)
-    print(f"Attempting to execute query for {params}")
-    return cursor.fetchall()
+    q = query.strip().upper()
+    
+    return cursor.fetchall() if q.startswith("SELECT") else cursor.lastrowid

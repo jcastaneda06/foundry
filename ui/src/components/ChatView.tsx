@@ -33,7 +33,7 @@ export function ChatView({ conversation, onUpdate }: Props) {
     setLoading(true);
 
     try {
-      const res = await sendMessage(prompt, conversation.messages);
+      const res = await sendMessage(prompt, conversation.messages, conversation.id);
       const assistantMessage = {
         role: "assistant" as const,
         content: res.answer,

@@ -5,5 +5,6 @@ class Message(BaseModel):
     content: str
 
 class ChatRequest(BaseModel):
+    conversation_id: str
     prompt: str
     message_history: list[Message] = []
