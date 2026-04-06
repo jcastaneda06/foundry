@@ -3,7 +3,7 @@ from models.grocery import Grocery
 from dotenv import load_dotenv
 from models.chat_request import Message
 from pydantic_ai.messages import ModelRequest, ModelResponse, TextPart
-from db.db import execute_query
+from db.database import execute_query
 
 load_dotenv()
 
@@ -61,6 +61,9 @@ async def create_grocery_list(ctx: RunContext, list_name: str, list_description:
   """
     Use this tool if you need to create a grocery list for a new list of groceries
     - Always create a grocery list if there are no matching names and descriptions in the database
+    - Use the context of the conversation to choose a name for the list. Examples:
+      - "Create a list for chicken rice" -> name: Chicken rice
+      - "I want to make spagetthi" -> name: Spagetthi
   """
   print(f"Creating grocery list for {list_name}")
   res = execute_query("INSERT INTO lists (name, description, completed) VALUES (?, ?, ?)", (list_name, list_description, 0))
