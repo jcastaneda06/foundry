@@ -2,7 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from models.chat_request import ChatRequest
 from agent import agent, to_model_message
+from db.db import init_db
+from services.grocery import get_all
 
+init_db()
 app = FastAPI()
 
 app.add_middleware(
@@ -12,10 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
+## TODO: CREATE get all lists / get all groceries
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return get_all()
 
 @app.post("/chat/")
 async def chat(prompt: ChatRequest):

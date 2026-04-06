@@ -21,7 +21,7 @@ docs/*
 
 # Environment
 .env
-
+py/groceries.db
 # Editor
 .vscode/*
 .claude/*
