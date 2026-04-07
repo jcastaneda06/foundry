@@ -14,4 +14,3 @@ class GroceryList(BaseModel):
   description: str
   completed: bool
   conversation_id: str | None = None
-  

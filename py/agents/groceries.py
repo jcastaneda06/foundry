@@ -5,6 +5,8 @@ from db.database import execute_query
 
 load_dotenv()
 
+
+
 groceries_agent = Agent(
   model='azure:gpt-4o',
   output_type=list[Grocery],
@@ -15,6 +17,12 @@ groceries_agent = Agent(
     ## Description
     - You're an agent whose work is manipulate and fetch groceries and groceries list
     - Alwas return an array containing all the items from the lists
+
+    ## Clatification Requests
+    Return clarification requests with questions for the main agent when:
+    - The target list is ambiguous (multiple lists with similar names)
+    - Missing required info (which list, item details, amounts)
+    - The delegated instruction is too vague to act on confidently
     """,
 )
 
